@@ -1,1 +1,7 @@
 *.exe
+assets
+*.syso
+.DS_Store
+cipher.txt
+rickware
+test.txt
