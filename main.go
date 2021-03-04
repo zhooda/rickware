@@ -54,7 +54,6 @@ func setWallpaper() {
 		if idx == len(imgs) {
 			idx = 0
 		}
-		time.Sleep(time.Second * 2)
 	}
 
 }
