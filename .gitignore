@@ -5,3 +5,7 @@ assets
 cipher.txt
 rickware
 test.txt
+obj
+bin
+.vs
+packages
